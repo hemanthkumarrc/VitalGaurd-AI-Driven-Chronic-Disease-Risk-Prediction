@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Disease Prediction</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="header-container">
+      <img
+        src="{{ url_for('static', filename='heart.png') }}"
+        alt="Heart Image"
+        id="logo"
+      />
+      <div>
+        <h1>AI Health Assistant</h1>
+        <h4>
+          Using advanced machine learning to analyze your symptoms and provide
+          <br />
+          preliminary health insights
+        </h4>
+      </div>
+
+      <img
+        src="{{ url_for('static', filename='stec.png') }}"
+        alt="Stethoscope Image"
+        id="stethoscope"
+      />
+    </div>
+
+    <div id="box">
+      <label for="symptom1">Symptom 1:</label>
+      <select id="symptom1"></select>
+
+      <label for="symptom2">Symptom 2:</label>
+      <select id="symptom2"></select>
+
+      <label for="symptom3">Symptom 3:</label>
+      <select id="symptom3"></select>
+
+      <label for="symptom4">Symptom 4:</label>
+      <select id="symptom4"></select>
+
+      <label for="symptom5">Symptom 5:</label>
+      <select id="symptom5"></select>
+      <br />
+
+      <div class="button-container">
+        <button onclick="predictDisease()">
+          <img
+            src="{{ url_for('static', filename='ecg.png') }}"
+            alt="ECG Image"
+            id="ecg"
+          />
+          Analyze Symptoms
+        </button>
+        <button onclick="resetForm()" id="reset-btn">Reset</button>
+      </div>
+    </div>
+
+    <h3>Prediction: <span id="result">None</span></h3>
+
+    <script>
+      const symptoms = [
+        "itching",
+        "skin_rash",
+        "nodal_skin_eruptions",
+        "continuous_sneezing",
+        "shivering",
+        "chills",
+        "joint_pain",
+        "stomach_pain",
+        "acidity",
+        "ulcers_on_tongue",
+        "muscle_wasting",
+        "vomiting",
+        "burning_micturition",
+        "spotting_ urination",
+        "fatigue",
+        "weight_gain",
+        "anxiety",
+        "cold_hands_and_feets",
+        "mood_swings",
+      ];
+
+      function populateDropdowns() {
+        let selects = document.querySelectorAll("select");
+        selects.forEach((select) => {
+          let option = document.createElement("option");
+          option.value = "None";
+          option.text = "None";
+          select.appendChild(option);
+
+          symptoms.forEach((symptom) => {
+            let option = document.createElement("option");
+            option.value = symptom;
+            option.text = symptom;
+            select.appendChild(option);
+          });
+        });
+      }
+
+      async function predictDisease() {
+        let symptomsSelected = [];
+        document.querySelectorAll("select").forEach((select) => {
+          if (select.value !== "None") {
+            symptomsSelected.push(select.value);
+          }
+        });
+
+        if (symptomsSelected.length === 0) {
+          alert("Please select at least one symptom.");
+          return;
+        }
+
+        let response = await fetch("http://127.0.0.1:5000/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ symptoms: symptomsSelected }),
+        });
+
+        let data = await response.json();
+        document.getElementById("result").innerText =
+          data.prediction || "Error";
+      }
+      function resetForm() {
+        document.querySelectorAll("select").forEach((select) => {
+          select.value = "None";
+        });
+        document.getElementById("result").innerText = "None";
+      }
+
+      populateDropdowns();
+    </script>
+  </body>
+</html>
