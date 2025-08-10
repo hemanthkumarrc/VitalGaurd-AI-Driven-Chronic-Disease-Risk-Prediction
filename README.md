@@ -1,33 +1,39 @@
-🩺 Chronic Disease Prediction
-A Flask web app that predicts chronic diseases based on selected symptoms using a Naive Bayes model.
+🩺 Chronic Disease Prediction Web App
+A Flask-based web application that predicts chronic diseases based on user-selected symptoms using a Naive Bayes classifier trained on medical data.
+
+📌 Features
+Predicts possible chronic diseases based on symptoms
+
+Uses Multinomial Naive Bayes for classification
+
+Clean, responsive UI with medical-themed styling
+
+Pre-trained on Training.csv dataset
+
+Returns predictions instantly without page reloads (AJAX)
+
+🖼️ Preview
 
 
-🚀 Features
-Symptom-based disease prediction
 
-Trained on medical dataset (Training.csv)
+🚀 Tech Stack
+Backend: Python, Flask, scikit-learn, Pandas, NumPy
 
-Simple, responsive UI
+Frontend: HTML, CSS (styles.css), JavaScript
 
-⚙️ Setup
+Machine Learning: Multinomial Naive Bayes (sklearn)
+
+📂 Project Structure
 bash
 Copy
 Edit
-git clone https://github.com/your-username/chronic-disease-prediction.git
-cd chronic-disease-prediction
-pip install flask pandas numpy scikit-learn
-python app.py
-Runs at http://127.0.0.1:5000
-
-📊 API
-POST /predict
-
-json
-{"symptoms": ["itching", "skin_rash"]}
-Response
-
-json
-{"prediction": "Fungal infection"}
-
-📌 Note
-For educational purposes only — not a medical tool.
+├── app.py              # Flask backend
+├── styles.css          # Styling for UI
+├── Training.csv        # Training dataset
+├── Testing.csv         # Testing dataset
+├── heart.png           # Heart logo
+├── ecg.png             # ECG icon for predict button
+├── stec.png            # Stethoscope icon
+├── templates/
+│   └── index.html      # Main UI
+├── README.md           # Project documentation
