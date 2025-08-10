@@ -24,16 +24,15 @@ Frontend: HTML, CSS (styles.css), JavaScript
 Machine Learning: Multinomial Naive Bayes (sklearn)
 
 📂 Project Structure
-bash
-Copy
-Edit
-├── app.py              # Flask backend
-├── styles.css          # Styling for UI
-├── Training.csv        # Training dataset
-├── Testing.csv         # Testing dataset
-├── heart.png           # Heart logo
-├── ecg.png             # ECG icon for predict button
-├── stec.png            # Stethoscope icon
+
+├── app.py              
+├── styles.css          
+├── Training.csv        
+├── Testing.csv         
+├── heart.png           
+├── ecg.png             
+├── stec.png            
 ├── templates/
-│   └── index.html      # Main UI
-├── README.md           # Project documentation
+│   └── index.html     
+
+├── README.md           
